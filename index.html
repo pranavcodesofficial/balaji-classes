@@ -214,7 +214,7 @@
 
   <script>
     // Replace with your Make.com (or other) webhook URL
-    const WEBHOOK_URL = "[YOUR MAKE WEBHOOK URL]";
+    const WEBHOOK_URL = "https://hook.eu1.make.com/gxi8p83nvnrpc6lszj7vhtyf7ndpgf48";
 
     const form = document.getElementById("enquiry-form");
     const phoneInput = document.getElementById("phone");
@@ -243,25 +243,22 @@
       submitBtn.disabled = true;
 
       try {
-        const res = await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ phone }),
-        });
+  await fetch(WEBHOOK_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ phone }),
+  });
 
-        if (!res.ok) {
-          throw new Error("Request failed");
-        }
-
-        form.style.display = "none";
-        successMsg.classList.add("visible");
-      } catch (err) {
-        errorMsg.textContent = "Something went wrong. Please try again or contact us directly.";
-        errorMsg.classList.add("visible");
-        submitBtn.disabled = false;
-      }
+  form.style.display = "none";
+  successMsg.classList.add("visible");
+} catch (err) {
+  errorMsg.textContent = "Something went wrong. Please try again.";
+  errorMsg.classList.add("visible");
+  submitBtn.disabled = false;
+}
     });
   </script>
 </body>
